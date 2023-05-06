@@ -1,0 +1,31 @@
+.modiCart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.modiCart>img {
+    width: 8rem;
+    height: 8rem;
+}
+.qty{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 11px;
+}
+.minus{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 5px;
+    color: azure;
+    background-color: lightcoral;
+    border: 0.5px solid lightgrey;
+}
+.plus{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 5px;
+    color: azure;
+    background-color: lightgreen;
+    border: 0.5px solid lightgrey;
+}

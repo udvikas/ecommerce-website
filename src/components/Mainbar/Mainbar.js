@@ -32,8 +32,8 @@ const Mainbar = () => {
   return (
     <>
     <div className="productCard">
-      {productsArr.map((item) => (
-        <Card style={{ width: "22rem" }}>
+      {productsArr.map((item,index) => (
+        <Card key={index} style={{ width: "22rem" }}>
           <Card.Img variant="top" src={item.imageUrl} />
           <Card.Body>
             <Card.Title>{item.title}</Card.Title>

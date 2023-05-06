@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navbar, Container, Button } from "react-bootstrap";
 import "./Header.css";
+import Cart from "../Cart/Cart";
 
 const Header = () => {
+  const [modalShow, setModalShow] = useState(false);
+
+  // const [state, setState] = useState("");
+  // const showProduct = () => {
+  //   setState([...state]);
+  // };
   return (
     <>
       <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
@@ -29,11 +36,18 @@ const Header = () => {
               </span>
             </span>
           </Navbar.Brand>
-          <Button variant="success">
-            My Cart <sup>2</sup>
+          <Button variant="primary" onClick={() => setModalShow(true)}>
+            My Cart 
           </Button>
         </Container>
+        <Cart show={modalShow}  onHide={() => setModalShow(false)} />
       </Navbar>
+      {/* {state &&
+        cartElements.map((item, index) => (
+          <h4 bg="primary">
+            {item.price} {item.title}{" "}
+          </h4>
+        ))} */}
     </>
   );
 };
