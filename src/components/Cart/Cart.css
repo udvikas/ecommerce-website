@@ -4,8 +4,8 @@
     align-items: center;
 }
 .modiCart>img {
-    width: 8rem;
-    height: 8rem;
+    width: 6rem;
+    height: 6rem;
 }
 .qty{
     display: flex;
@@ -28,4 +28,12 @@
     color: azure;
     background-color: lightgreen;
     border: 0.5px solid lightgrey;
+}
+.total{
+    display: flex;
+    width: 300px;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 26rem;
+    margin-bottom: 0.5rem;
 }

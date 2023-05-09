@@ -19,3 +19,5 @@ const Strip = () => {
 };
 
 export default Strip;
+
+

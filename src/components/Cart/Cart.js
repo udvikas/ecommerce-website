@@ -1,32 +1,28 @@
+import { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import './Cart.css';
-const cartElements = [
-  {
-    title: "Blue and Orange Colors",
-    price: 100,
-    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
-    quantity: 2,
-  },
-  {
-    title: "Black and White Colors",
-    price: 50,
-    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-    quantity: 3,
-  },
-  {
-    title: "Yellow and Black Colors",
-    price: 70,
-    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-    quantity: 1,
-  },
-];
+import "./Cart.css";
+import { CartContext } from "../../MyContext";
 
 function Cart(props) {
+  const productCart = useContext(CartContext);
 
-    const checkoutHandler = () => {
-        alert('Congrats! Your Order is Successfully Placed')
-    }
+  const checkoutHandler = () => {
+    alert("Congrats! Your Order is Successfully Placed");
+  };
+
+  const removeHandler = (item) => {
+    productCart.removeItem(item);
+    console.log("after removing", productCart);
+  };
+  const increaseHandler = (item) => {
+    productCart.increaseQty(item);
+  };
+
+  const decreaseHandler = (item) => {
+    productCart.decreseQty(item);
+  };
+
   return (
     <Modal
       {...props}
@@ -39,25 +35,37 @@ function Cart(props) {
           Product Cart
         </Modal.Title>
       </Modal.Header>
-      {cartElements.map((item,index) => (
-        <Modal.Body key={index}>
+      {productCart.items.map((item) => (
+        <Modal.Body key={item.id}>
           <div className="modiCart">
-          <img src={item.imageUrl} alt="images"  />
-          <h5>{item.title}</h5>
-          <div className="qty">
-          <button className="minus">-</button>
-          <h5>{item.quantity}</h5>
-          <button className="plus">+</button>
-          </div>
-          <h6>${item.price}</h6>
-          <Button variant="danger"><i className="bi bi-trash3-fill"></i></Button>
+            <img src={item.imageUrl} alt="images" />
+            <h5>{item.title}</h5>
+            <h6>${item.price.toFixed(2)}</h6>
+            <div className="qty">
+              <button onClick={() => decreaseHandler(item)} className="minus">
+                -
+              </button>
+              <h5>{item.quantity}</h5>
+              <button onClick={() => increaseHandler(item)} className="plus">
+                +
+              </button>
+              {console.log("remove quantity", item.quantity)}
+            </div>
+            <h6>${(item.price * item.quantity).toFixed(2)}</h6>
+            <Button variant="danger" onClick={() => removeHandler(item)}>
+              <i className="bi bi-trash3-fill"></i>
+            </Button>
           </div>
         </Modal.Body>
       ))}
+      <hr />
+      <div className="total">
+        <h4>Total Amount</h4>
+        <h4>${productCart.totalAmount.toFixed(2)}</h4>
+      </div>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
         <Button onClick={checkoutHandler}>Checkout</Button>
-        <h4>Total $220</h4>
       </Modal.Footer>
     </Modal>
   );
