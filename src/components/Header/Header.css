@@ -1,9 +1,9 @@
-.lnk a {
-    list-style: none;
-    list-style-type: none;
-    text-decoration: none;
-    color: aliceblue;
+
+.navtab {
+   display:flex;
+   margin-right: 21rem;
+   list-style: none;
 }
-
-
-
+.tab {
+    list-style: none;
+}

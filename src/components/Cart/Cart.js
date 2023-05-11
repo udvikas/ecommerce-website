@@ -8,7 +8,9 @@ function Cart(props) {
   const productCart = useContext(CartContext);
 
   const checkoutHandler = () => {
+    if (productCart.items.length >= 1) {
     alert("Congrats! Your Order is Successfully Placed");
+    }
   };
 
   const removeHandler = (item) => {
@@ -59,10 +61,14 @@ function Cart(props) {
         </Modal.Body>
       ))}
       <hr />
-      <div className="total">
-        <h4>Total Amount</h4>
-        <h4>${productCart.totalAmount.toFixed(2)}</h4>
-      </div>
+      {productCart.items.length === 0 ? (
+        <h2>Your Cart is Empty</h2>
+      ) : (
+        <div className="total">
+          <h4>Total Amount</h4>
+          <h4>${productCart.totalAmount.toFixed(2)}</h4>
+        </div>
+      )}
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
         <Button onClick={checkoutHandler}>Checkout</Button>

@@ -15,12 +15,11 @@ export const ContextProvider = (props) => {
   const addItemHandler = (item) => {
 
     let itemCopy = [...cartItems];
-   let ID = itemCopy.findIndex((el) => el.id === item.id) // -1
+    let ID = itemCopy.findIndex((el) => el.id === item.id) 
     if (ID === -1) {
       setCartItems([...itemCopy,item])
-      
     } else {
-      itemCopy[ID].quantity = Number(itemCopy[ID].quantity) + 1
+      itemCopy[ID].quantity++;
       setCartItems(itemCopy)
     }
   };

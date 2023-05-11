@@ -31,9 +31,18 @@
 }
 .total{
     display: flex;
-    width: 300px;
-    justify-content: space-between;
+    width: 350px;
     align-items: center;
-    margin-left: 26rem;
+    margin-left: 25rem;
     margin-bottom: 0.5rem;
+}
+.total>h4 {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+h2 {
+    text-align: center;
+    color: red;
+    padding-bottom: 0.5rem;
 }

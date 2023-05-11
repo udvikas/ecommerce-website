@@ -3,6 +3,7 @@ import { Navbar, Container, Button } from "react-bootstrap";
 import "./Header.css";
 import Cart from "../Cart/Cart";
 import { CartContext } from "../../MyContext";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   const [modalShow, setModalShow] = useState(false);
@@ -13,45 +14,60 @@ const Header = () => {
   headerCart.items.forEach((item) => {
     quantity = quantity + Number(item.quantity);
   });
-  const showCartHandler = () => {
-    if (headerCart.items.length === 0) {
-      alert('Please Add Your Item :)')
-      setModalShow(false)
-    } else{
-      setModalShow(true)
-    }
-  }
+
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
-      <Container expand="lg">
-        <Navbar.Brand>
-          <h3>E Zone</h3>
-        </Navbar.Brand>
-        <Navbar.Brand>
-          <span className="lnk">
-            <span>
-              <a href="#home">Home</a>
+    <>
+      <Navbar
+        bg="dark"
+        variant="dark"
+        expand="lg"
+        fixed="top"
+        className="navbarhead"
+      >
+        <Container expand="lg">
+          <Navbar.Brand>
+            <h3>E Zone</h3>
+          </Navbar.Brand>
+          <Navbar.Brand>
+            <span className="navtab">
+              <NavLink
+                to="/home"
+                style={{
+                  color: "#fff",
+                  textDecoration: "none",
+                }}
+              >
+                HOME
+              </NavLink>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <NavLink
+                to="/store"
+                style={{ color: "#fff", textDecoration: "none" }}
+              >
+                STORE
+              </NavLink>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <NavLink
+                to="/about"
+                style={{ color: "#fff", textDecoration: "none" }}
+              >
+                ABOUT
+              </NavLink>
+              &nbsp;&nbsp;&nbsp;&nbsp;
             </span>
-            &nbsp;&nbsp;&nbsp;
-            {" | "}
-            <span>
-              &nbsp;&nbsp;
-              <a href="#store">Store</a>
-            </span>
-            &nbsp;&nbsp;&nbsp;
-            {" | "}
-            <span>
-              &nbsp;&nbsp;&nbsp;
-              <a href="#about">About</a>
-            </span>
-          </span>
-        </Navbar.Brand>
-        <Button variant="primary" onClick={showCartHandler}>
-          <i className="bi bi-bag-check-fill"></i> Cart {quantity}
+          </Navbar.Brand>
+        </Container>
+        <Button
+          style={{ marginRight: "4rem" }}
+          variant="primary"
+          onClick={() => setModalShow(true)}
+        >
+          <i className="bi bi-bag-check-fill"></i> Cart{" "}
+          <span className="badge bg-secondary">{quantity}</span>
         </Button>
-      </Container>
-      <Cart show={modalShow} onHide={() => setModalShow(false)} />
-    </Navbar>
+        <Cart show={modalShow} onHide={() => setModalShow(false)} />
+      </Navbar>
+    </>
   );
 };
 
