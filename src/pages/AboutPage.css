@@ -1,0 +1,21 @@
+h1 {
+    text-align: center;
+    padding: 0.5rem 0rem;
+}
+img {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+}
+.settle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.settle>img {
+    margin: 0rem 5rem;
+}
+.settle>p {
+    margin: 0rem 5rem 0rem 0rem;;
+}
