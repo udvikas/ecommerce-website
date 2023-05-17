@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Navbar, Container, Button } from "react-bootstrap";
-import "./Header.css";
+import classes  from "./Header.module.css";
+
 import Cart from "../Cart/Cart";
 import { CartContext } from "../../MyContext";
 import { NavLink } from "react-router-dom";
@@ -28,8 +29,51 @@ const Header = () => {
           <Navbar.Brand>
             <h3>E Zone</h3>
           </Navbar.Brand>
-          <Navbar.Brand>
-            <span className="navtab">
+          <header className={classes.header}>
+            <nav>
+              <ul>
+                <li>
+                  <NavLink to="/home">
+                    HOME
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/store">
+                    STORE
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/about">
+                    ABOUT
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/contact">
+                    CONTACT
+                  </NavLink>
+                </li>
+              </ul>
+            </nav>
+          </header>
+        </Container>
+        <Button
+          style={{ marginRight: "4rem" }}
+          variant="primary"
+          onClick={() => setModalShow(true)}
+        >
+          <i className="bi bi-bag-check-fill"></i> Cart{" "}
+          <span className="badge bg-secondary">{quantity}</span>
+        </Button>
+        <Cart show={modalShow} onHide={() => setModalShow(false)} />
+      </Navbar>
+    </>
+  );
+};
+
+export default Header;
+
+{
+  /* <span className="navtab">
               <NavLink
                 to="/home"
                 style={{
@@ -54,21 +98,11 @@ const Header = () => {
                 ABOUT
               </NavLink>
               &nbsp;&nbsp;&nbsp;&nbsp;
-            </span>
-          </Navbar.Brand>
-        </Container>
-        <Button
-          style={{ marginRight: "4rem" }}
-          variant="primary"
-          onClick={() => setModalShow(true)}
-        >
-          <i className="bi bi-bag-check-fill"></i> Cart{" "}
-          <span className="badge bg-secondary">{quantity}</span>
-        </Button>
-        <Cart show={modalShow} onHide={() => setModalShow(false)} />
-      </Navbar>
-    </>
-  );
-};
-
-export default Header;
+              <NavLink
+                to="/contactus"
+                style={{ color: "#fff", textDecoration: "none" }}
+              >
+                CONTACT US
+              </NavLink>
+            </span> */
+}

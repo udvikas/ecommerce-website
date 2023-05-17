@@ -1,21 +1,23 @@
 import React from "react";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import HomePage from "./pages/Homepage";
 import Mainbar from "./components/Mainbar/Mainbar";
 import Strip from "./components/Header/Strip";
 import AboutPage from "./pages/AboutPage";
-import { Routes, Route } from "react-router-dom";
+import {Routes, Route } from "react-router-dom";
+import ContactUs from "./pages/ContactUs";
+import Homepage from "./pages/Homepage";
 
 function App() {
   return (
     <>
       <Header />
-      <Strip/>
+      <Strip />
       <Routes>
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/store" element={<Mainbar />} />
-        <Route path="/about" element={<AboutPage />} />
+        <Route path="/home" element=<Homepage /> />
+        <Route exact path="/store" element=<Mainbar /> />
+        <Route path="/about" element=<AboutPage /> />
+        <Route path="/contact" element=<ContactUs /> />
       </Routes>
       <Footer />
     </>
