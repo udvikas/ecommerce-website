@@ -16,22 +16,26 @@ export const ContextProvider = (props) => {
 
     let itemCopy = [...cartItems];
     let ID = itemCopy.findIndex((el) => el.id === item.id) 
+    const requiredItems = cartItems[ID]
     if (ID === -1) {
       setCartItems([...itemCopy,item])
     } else {
-      itemCopy[ID].quantity++;
-      setCartItems(itemCopy)
+      
+      setCartItems((prev) => {
+        prev[ID] = {...requiredItems, quantity:requiredItems.quantity + 1}
+        return [...prev]
+      })
     }
   };
 
   const removeFromCart = (item) => {
+    let findCartItem = cartItems.findIndex((el) => el.id === item.id);
+    console.log(findCartItem);
+    cartItems[findCartItem].quantity = 0;
     let itemCopy = [...cartItems];
 
-    let ID = itemCopy.findIndex((el) => el.id === item.id);
-    if(ID !== -1){
-    itemCopy.splice(ID, 1)
-    setCartItems(itemCopy)
-    }
+    const reqItem = itemCopy.filter((el) => el.id !== item.id)
+    setCartItems([...reqItem]);
   };
 
   const increaseQtyHandler = (item) => {
