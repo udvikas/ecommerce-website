@@ -30,3 +30,8 @@
     padding-bottom: 0.25rem;
     border-bottom: 4px solid #95bcf0;
 }
+button {
+    background-color: #212529;
+    color: white;
+    border: 0px;
+}

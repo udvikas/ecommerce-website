@@ -1,20 +1,27 @@
 import React, { useContext, useState } from "react";
 import { Navbar, Container, Button } from "react-bootstrap";
-import classes  from "./Header.module.css";
-
+import classes from "./Header.module.css";
+import { useNavigate } from "react-router-dom";
 import Cart from "../Cart/Cart";
 import { CartContext } from "../../MyContext";
 import { NavLink } from "react-router-dom";
 
 const Header = () => {
   const [modalShow, setModalShow] = useState(false);
-
+  const navigate = useNavigate();
   const headerCart = useContext(CartContext);
+  const isLoggedIn = headerCart.isLoggedIn;
 
   let quantity = 0;
   headerCart.items.forEach((item) => {
     quantity = quantity + Number(item.quantity);
   });
+
+  const logoutHandler = () => {
+    headerCart.Logout();
+    console.log('successfully logged out!')
+    navigate('/');
+ }
 
   return (
     <>
@@ -33,29 +40,32 @@ const Header = () => {
             <nav>
               <ul>
                 <li>
-                  <NavLink to="/home">
-                    HOME
-                  </NavLink>
+                  <NavLink to="/">HOME</NavLink>
+                </li>
+               {headerCart.isLoggedIn && <li>
+                  <NavLink to="/store">STORE</NavLink>
+                </li>}
+                <li>
+                  <NavLink to="/about">ABOUT</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/">
-                    STORE
-                  </NavLink>
+                  <NavLink to="/contact">CONTACT</NavLink>
                 </li>
-                <li>
-                  <NavLink to="/about">
-                    ABOUT
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/contact">
-                    CONTACT
-                  </NavLink>
-                </li>
+                  {!isLoggedIn && (
+                    <li>
+                      <NavLink to="/login">LOGIN</NavLink>
+                    </li>
+                  )}
+                {isLoggedIn && (
+                  <li>
+                    <button onClick={logoutHandler}>LOGOUT</button>
+                  </li>
+                )}
               </ul>
             </nav>
           </header>
         </Container>
+
         <Button
           style={{ marginRight: "4rem" }}
           variant="primary"
@@ -71,38 +81,3 @@ const Header = () => {
 };
 
 export default Header;
-
-{
-  /* <span className="navtab">
-              <NavLink
-                to="/home"
-                style={{
-                  color: "#fff",
-                  textDecoration: "none",
-                }}
-              >
-                HOME
-              </NavLink>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <NavLink
-                to="/store"
-                style={{ color: "#fff", textDecoration: "none" }}
-              >
-                STORE
-              </NavLink>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <NavLink
-                to="/about"
-                style={{ color: "#fff", textDecoration: "none" }}
-              >
-                ABOUT
-              </NavLink>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <NavLink
-                to="/contactus"
-                style={{ color: "#fff", textDecoration: "none" }}
-              >
-                CONTACT US
-              </NavLink>
-            </span> */
-}

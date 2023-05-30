@@ -1,6 +1,17 @@
-.listtour {
-    border: 1px solid red;
+.art {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }
-td,tr {
+.heading {
+    display: flex;
+    justify-content: center;
     text-align: center;
+    font-weight: 900;
+    font-size: 30px;
+}
+.demo {
+    display: flex;
+    justify-content: center;
 }

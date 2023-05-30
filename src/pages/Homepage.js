@@ -1,68 +1,55 @@
-import React from "react";
 import "./HomePage.css";
-import { Table, Button } from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { NavLink } from "react-router-dom";
+import { CartContext } from "../MyContext";
+
 const Homepage = () => {
+  const homeCtx = useContext(CartContext);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => {
+    if (!homeCtx.isLoggedIn) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  };
+  // {!homeCtx.isLoggedIn ? 'Go to Store' : ''}
+  const image1 =
+    "https://rare-gallery.com/uploads/posts/5334415-gallery-art-painting-man-guy-male-browse-coat-jacket-display-grid-wall-hanging-artist-colour-artwork-person-museum-free-images.jpg";
   return (
     <>
-      <h1>Tour Details</h1>
-      <Table striped bordered hover variant="dark">
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>JUL 16</td>
-            <td>DETROIT, MI</td>
-            <td>DTE ENERGY MUSIC THEATRE</td>
-            <td>
-              <Button variant="info">Buy Tickets</Button>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>JUL 19</td>
-            <td>TORONTO,ON</td>
-            <td>BUDWEISER STAGE</td>
-            <td>
-              <Button variant="info">Buy Tickets</Button>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>JUL 22</td>
-            <td>BRISTOW, VA</td>
-            <td>JIGGY LUBE LIVE</td>
-            <td>
-              <Button variant="info">Buy Tickets</Button>
-            </td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>JUL 29</td>
-            <td>PHOENIX, AZ</td>
-            <td>AK-CHIN PAVILION</td>
-            <td>
-              <Button variant="info">Buy Tickets</Button>
-            </td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>AUG 2</td>
-            <td>LAS VEGAS, NV</td>
-            <td>T-MOBILE ARENA</td>
-            <td>
-              <Button variant="info">Buy Tickets</Button>
-            </td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>AUG 7</td>
-            <td>CONCORD, CA</td>
-            <td>CONCORD PAVILION</td>
-            <td>
-              <Button variant="info">Buy Tickets</Button>
-            </td>
-          </tr>
-        </tbody>
-      </Table>
+      <h1>Welcome to Art Gallery</h1>
+      <div className="demo">
+        {!homeCtx.isLoggedIn && <button className="btn btn-outline-info" onClick={handleShow}>
+          Go to Store
+        </button>}
+      </div>
+      <div className="art">
+        <img src={image1} alt="art gallery" />
+        <img src={image1} alt="art gallery" />
+        <img src={image1} alt="art gallery" />
+        <img src={image1} alt="art gallery" />
+      </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Oops! You are not Logged In!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="heading">
+            <NavLink to="/login" style={{ textDecoration: "none" }}>
+              Login here!
+            </NavLink>
+          </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

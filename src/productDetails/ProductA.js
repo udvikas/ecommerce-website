@@ -9,7 +9,7 @@ const ProductA = (props) => {
   return (
     <section>
       <div className={classes.box}>
-        <img src={props.item.imageUrl} alt="" />
+        <img src={props.item.imageUrl} alt="images" />
         <div className={classes.detail}>
           <h3>{props.item.title}</h3>
           <h5>Price ${props.item.price}</h5>

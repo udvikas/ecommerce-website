@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
-import pic from '../asset/pic.jpg'
 import './AboutPage.css';
 
 const AboutPage = () => {
+  const pic = 'https://cdn.pixabay.com/photo/2015/04/29/09/28/graffiti-745072_1280.jpg'
   return (
     <Fragment>
       {" "}

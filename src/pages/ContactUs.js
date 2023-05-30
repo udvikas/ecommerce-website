@@ -20,7 +20,7 @@ const ContactUs = () => {
     }
     try {
       // send the POST request to the server
-      const response = await fetch('https://ecommerce-fetching-default-rtdb.firebaseio.com/data.json', {
+      const response = await fetch('https://ecommerce-auth-a598c-default-rtdb.firebaseio.com/data.json', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

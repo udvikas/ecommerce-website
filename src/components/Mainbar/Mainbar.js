@@ -4,51 +4,58 @@ import { Button, Card } from "react-bootstrap";
 import ScrollToTop from "react-scroll-to-top";
 import { CartContext } from "../../MyContext";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const productsArr = [
   {
     id: 1,
     quantity: 1,
-    title: "Blue and Orange Colors",
-    price: 100.5,
-    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
+    title: "First face Colorful art",
+    price: 500,
+    imageUrl:'https://cdn.pixabay.com/photo/2017/12/01/08/02/paint-2990357_1280.jpg',
   },
   {
     id: 2,
     quantity: 1,
-    title: "Black and white Colors",
-    price: 50.5,
-    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
+    title: "Second face Colorful art",
+    price: 400,
+    imageUrl: "https://cdn.pixabay.com/photo/2017/11/29/09/15/paint-2985569_1280.jpg",
   },
   {
     id: 3,
     quantity: 1,
-    title: "Yellow and Black Colors",
-    price: 70.5,
-    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
+    title: "Third face Colorful art",
+    price: 700,
+    imageUrl: "https://cdn.pixabay.com/photo/2017/08/30/12/45/girl-2696947_1280.jpg",
   },
   {
     id: 4,
     quantity: 1,
-    title: "Blue and Cyan Colors",
-    price: 100.5,
-    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
+    title: "Fouth face Colorful art",
+    price: 300,
+    imageUrl: "https://cdn.pixabay.com/photo/2017/11/28/12/39/makeup-2983550_1280.jpg",
   },
 ];
 
 const Mainbar = (props) => {
   const cartCntx = useContext(CartContext);
-
+  const isLoggedIn = cartCntx.isLoggedIn;
+  const navigate = useNavigate();
   const addToCartHandler = (item) => {
     cartCntx.addItem(item);
   };
 
-
   return (
     <>
+      <h5> {props.name && `Hi! ${props.name}`}</h5>
       <div className="productCard">
         {productsArr.map((item) => (
           <Card key={item.id} style={{ width: "22rem" }}>
-            <NavLink to={`/${item.id}`} onClick={() => {props.item(item)}}>
+            <NavLink
+              to={`/${item.id}`}
+              onClick={() => {
+                props.item(item);
+              }}
+            >
               <Card.Img variant="top" src={item.imageUrl} />
             </NavLink>
             <Card.Body>
