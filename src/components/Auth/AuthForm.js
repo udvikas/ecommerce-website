@@ -58,7 +58,6 @@ const AuthForm = () => {
       authCtx.Login(data.idToken);
       navigate('/store');
 
-      console.log('data',data);
       console.log('successfully logged in!')
     }).catch((err) => {
       alert(err.message)
@@ -85,7 +84,7 @@ const AuthForm = () => {
         </div>
         <div className={classes.actions}>
           {!isLoading && (
-            <button>{isLogin ? "Login" : "Create Account"}</button>
+            <button>{isLogin ? "Login" : "Submit"}</button>
           )}
           {isLoading && <p>Sending Request...</p>}
           <button
@@ -93,7 +92,7 @@ const AuthForm = () => {
             className={classes.toggle}
             onClick={switchAuthModeHandler}
           >
-            {isLogin ? "Create new account" : "Login with existing account"}
+            {isLogin ? "Create New Account" : "Login with existing account"}
           </button>
         </div>
       </form>

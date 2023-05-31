@@ -9,10 +9,10 @@ const ProductA = (props) => {
   return (
     <section>
       <div className={classes.box}>
-        <img src={props.item.imageUrl} alt="images" />
+        <img src={props.item?.imageUrl} alt="some images" />
         <div className={classes.detail}>
           <h3>{props.item.title}</h3>
-          <h5>Price ${props.item.price}</h5>
+          {/* <h5>Price ${props.item.price}</h5> */}
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. In ullam
             consequuntur veritatis voluptate quidem suscipit ex, illo,
@@ -21,7 +21,7 @@ const ProductA = (props) => {
             doloribus veniam optio aut, eveniet earum cum quo beatae. Ut magni
             autem tempore voluptate. Modi?
           </p>
-          {/* <p>{props.item.quantity}</p> */}
+          <h5>Price ${props.item.price}</h5>
         </div>
       </div>
     </section>

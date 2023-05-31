@@ -1,73 +1,66 @@
+
 .auth {
-  margin: 3rem auto;
-  width: 95%;
-  max-width: 25rem;
-  border-radius: 6px;
-  background-color: #38015c;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  padding: 1rem;
-  text-align: center;
-  color: white;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f5f5f5;
 }
 
 .auth h1 {
   text-align: center;
-  color: white;
+  margin-bottom: 20px;
 }
 
-.control {
-  margin-bottom: 0.5rem;
+.auth form {
+  display: flex;
+  flex-direction: column;
 }
 
-.control label {
-  display: block;
-  color: white;
+.auth .control {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column; 
+}
+
+.auth .control label {
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin-bottom: 5px;
 }
 
-.control input {
-  font: inherit;
-  background-color: #f1e1fc;
-  color: #38015c;
-  border-radius: 4px;
-  border: 1px solid white;
-  width: 100%;
-  text-align: left;
-  padding: 0.25rem;
+.auth .control input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: 100%; 
 }
 
-.actions {
-  margin-top: 1.5rem;
+.auth .actions {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 10px;
 }
 
-.actions button {
-  cursor: pointer;
-  font: inherit;
-  color: white;
-  background-color: #9f5ccc;
-  border: 1px solid #9f5ccc;
-  border-radius: 4px;
-  padding: 0.5rem 2.5rem;
-}
-
-.actions button:hover {
-  background-color: #873abb;
-  border-color: #873abb;
-}
-
-.actions .toggle {
-  margin-top: 1rem;
-  background-color: transparent;
-  color: #9f5ccc;
+.auth .actions button {
+  padding: 10px 20px;
   border: none;
-  padding: 0.15rem 1.5rem;
+  border-radius: 3px;
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.actions .toggle:hover {
+.auth .actions .toggle {
+  margin-top: 10px;
   background-color: transparent;
-  color: #ae82cc;
+  color: #007bff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.auth .actions .toggle:hover {
+  text-decoration: underline;
 }

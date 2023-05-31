@@ -12,10 +12,11 @@ import AuthForm from "./components/Auth/AuthForm";
 import { CartContext } from "./MyContext";
 
 function App() {
-  const [item_details, setItem_Details] = useState();
+  const [item_details, setItem_Details] = useState(JSON.parse(localStorage.getItem("item_details")));
   const authCtx = useContext(CartContext);
   const productDetailshandler = (item) => {
     setItem_Details(item);
+    localStorage.setItem("item_details", JSON.stringify(item));
   };
 
   return (
@@ -23,14 +24,14 @@ function App() {
       <Header />
       <Strip />
       <Routes>
+      <Route path="/" element={<Homepage />} />
       {!authCtx.isLoggedIn && (
           <Route path="/login" element={<AuthForm/>}/>
         )}
-        <Route path="/" element={<Homepage />} />
-        <Route path="/store" item={productDetailshandler} element={<Mainbar />} />
+        <Route path="/store" element={<Mainbar item={productDetailshandler} />}   />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactUs />} />
-        <Route path="/:productID" item={item_details} element={<ProductA />} />
+        <Route path="/:productID" element={<ProductA item={item_details}/>}  />
       </Routes>
       <Footer />
     </BrowserRouter>
