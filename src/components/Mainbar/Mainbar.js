@@ -1,8 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./Mainbar.css";
 import { Button, Card } from "react-bootstrap";
 import { CartContext } from "../../MyContext";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
+
 const productsArr = [
   {
     id: 1,
@@ -40,17 +42,60 @@ const productsArr = [
 
 const Mainbar = (props) => {
   const cartCntx = useContext(CartContext);
+  
+  const email = localStorage.getItem('email')  
+  const replacedEmail = email.replace("@", "").replace(".", "")
+  console.log('cart items',cartCntx.items);
+
+  useEffect(() => {
+    console.log('email', email)
+    axios
+      .get(
+        `https://crudcrud.com/api/09a67abe70f54fd3848b18a9e9480844/${replacedEmail}`)
+      .then((response) => {
+        // Handle successful response
+        console.log('cart response',response.data);
+        cartCntx.setITEM(response.data);
+      })
+      .catch((error) => {
+        // Handle error
+        console.error(error);
+      });
+  }, [props.email]);
+  
+
 
   const addToCartHandler = (item) => {
+    console.log("item", item); // item is coming
     cartCntx.addItem(item);
+
+    const data = {
+      email: props.email,
+    };
+    axios
+      .post(
+        `https://crudcrud.com/api/09a67abe70f54fd3848b18a9e9480844/` +
+          data.email.replace("@", "").replace(".", ""),
+        item
+      )
+      .then((response) => {
+        // Handle successful response
+        console.log("data in post", response.data); // data is coming
+      })
+      .catch((error) => {
+        // Handle error
+        console.error(error);
+      });
   };
 
+ 
   return (
     <>
       <div className="productCard">
         {productsArr.map((item) => (
           <Card key={item.id} style={{ width: "22rem" }}>
-            <NavLink to={`/${item.id}`}
+            <NavLink
+              to={`/${item.id}`}
               onClick={() => {
                 props.item(item);
               }}
@@ -76,4 +121,3 @@ const Mainbar = (props) => {
 };
 
 export default Mainbar;
-

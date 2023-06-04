@@ -19,17 +19,18 @@ export const ContextProvider = (props) => {
   const [token, setToken] = useState(initialToken);
 
   const userIsLoggedIn = !!token;
-  console.log("userisLoggedIn", userIsLoggedIn);
 
   const loginHandler = (token) => {
     setToken(token);
     localStorage.setItem("tokenID", token);
   };
+
+
   const logoutHandler = () => {
     setToken(null);
     localStorage.removeItem("tokenID");
     localStorage.removeItem("tokenExpiration");
-
+    setCartItems([]);
   };
 
   const addItemHandler = (item) => {
@@ -46,6 +47,9 @@ export const ContextProvider = (props) => {
     }
   };
 
+  const setITEMS = (data) => {
+    setCartItems(data)
+  }
   const removeFromCart = (item) => {
     let findCartItem = cartItems.findIndex((el) => el.id === item.id);
     console.log(findCartItem);
@@ -93,6 +97,7 @@ export const ContextProvider = (props) => {
     isLoggedIn: userIsLoggedIn,
     Login: loginHandler,
     Logout: logoutHandler,
+    setITEM:setITEMS,
   };
   return (
     <CartContext.Provider value={itemContext}>

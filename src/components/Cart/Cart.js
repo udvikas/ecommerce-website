@@ -1,21 +1,39 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "./Cart.css";
 import { CartContext } from "../../MyContext";
+import axios from "axios";
 
 function Cart(props) {
-  const productCart = useContext(CartContext);
+   
+   const productCart = useContext(CartContext);
+   const email = props.email
+
+  // useEffect(() => {
+  //   console.log('email', email)
+  //   axios
+  //     .get(
+  //       `https://crudcrud.com/api/1c5d77eeb6af4ee69ad66db9edb53c7e/${email}`)
+  //     .then((response) => {
+  //       // Handle successful response
+  //       console.log('cart response',response.data);
+       
+  //     })
+  //     .catch((error) => {
+  //       // Handle error
+  //       console.error(error);
+  //     });
+  // }, [props.email]);
 
   const checkoutHandler = () => {
     if (productCart.items.length >= 1) {
-    alert("Congrats! Your Order is Successfully Placed");
+      alert("Congrats! Your Order is Successfully Placed");
     }
   };
 
   const removeHandler = (item) => {
     productCart.removeItem(item);
-    console.log("after removing", productCart);
   };
   const increaseHandler = (item) => {
     productCart.increaseQty(item);
@@ -51,7 +69,6 @@ function Cart(props) {
               <button onClick={() => increaseHandler(item)} className="plus">
                 +
               </button>
-              {console.log("remove quantity", item.quantity)}
             </div>
             <h6>${(item.price * item.quantity).toFixed(2)}</h6>
             <Button variant="danger" onClick={() => removeHandler(item)}>

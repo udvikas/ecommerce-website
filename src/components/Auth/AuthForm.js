@@ -8,9 +8,8 @@ const AuthForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const authCtx = useContext(CartContext);
   const navigate = useNavigate();
-  const emailInputRef = useRef();
+  const emailInputRef = useRef(); 
   const passwordInputRef = useRef();
-
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
   };
@@ -18,7 +17,9 @@ const AuthForm = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     const enteredEmail = emailInputRef.current.value; 
+    console.log(enteredEmail);
     const enteredPassword = passwordInputRef.current.value; 
+    console.log(enteredPassword);
     // optional: Add Validation
     setIsLoading(true);
     let url;
@@ -48,7 +49,6 @@ const AuthForm = () => {
       } else {
         return res.json().then((data) => {
           // //show error modal
-          console.log('data',data);
 
           let errorMessage = "Authentication failed";
           throw new Error(errorMessage);
@@ -56,7 +56,8 @@ const AuthForm = () => {
       }
     }).then((data) =>{
       authCtx.Login(data.idToken);
-      navigate('/store');
+      localStorage.setItem("email", enteredEmail);
+      navigate('/store', { state: { email:enteredEmail, password:enteredPassword } });
 
       console.log('successfully logged in!')
     }).catch((err) => {
@@ -66,7 +67,7 @@ const AuthForm = () => {
   
   return (
     <>
-    <h1>{isLogin ? 'Login' : 'Signup'}</h1>
+    <h1>{ isLogin ? 'Login' : 'Signup'}</h1>
     <section className={classes.auth}>
       <form onSubmit={submitHandler}>
         <div className={classes.control}>

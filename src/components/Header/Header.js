@@ -1,16 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Navbar, Container, Button } from "react-bootstrap";
 import classes from "./Header.module.css";
 import { useNavigate } from "react-router-dom";
 import Cart from "../Cart/Cart";
 import { CartContext } from "../../MyContext";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
-const Header = () => {
+const Header = (props) => {
   const [modalShow, setModalShow] = useState(false);
   const navigate = useNavigate();
   const headerCart = useContext(CartContext);
   const isLoggedIn = headerCart.isLoggedIn;
+ 
 
   let quantity = 0;
   headerCart.items.forEach((item) => {
@@ -21,6 +23,7 @@ const Header = () => {
     headerCart.Logout();
     console.log('successfully logged out!')
     navigate('/');
+    localStorage.removeItem('email');
  }
 
   return (
@@ -74,7 +77,7 @@ const Header = () => {
           <i className="bi bi-bag-check-fill"></i> Cart{" "}
           <span className="badge bg-secondary">{quantity}</span>
         </Button>
-        <Cart show={modalShow} onHide={() => setModalShow(false)} />
+        <Cart email={props.email} show={modalShow} onHide={() => setModalShow(false)} />
       </Navbar>
     </>
   );
