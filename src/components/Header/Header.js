@@ -1,11 +1,10 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { Navbar, Container, Button } from "react-bootstrap";
 import classes from "./Header.module.css";
 import { useNavigate } from "react-router-dom";
 import Cart from "../Cart/Cart";
 import { CartContext } from "../../MyContext";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
 
 const Header = (props) => {
   const [modalShow, setModalShow] = useState(false);

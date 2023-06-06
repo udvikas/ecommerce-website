@@ -51,7 +51,7 @@ const Mainbar = (props) => {
     console.log('email', email)
     axios
       .get(
-        `https://crudcrud.com/api/09a67abe70f54fd3848b18a9e9480844/${replacedEmail}`)
+        `https://crudcrud.com/api/134952ec7831463fad76bebdb21f9ec8/${replacedEmail}`)
       .then((response) => {
         // Handle successful response
         console.log('cart response',response.data);
@@ -66,7 +66,7 @@ const Mainbar = (props) => {
 
 
   const addToCartHandler = (item) => {
-    console.log("item", item); // item is coming
+    console.log("item", item); 
     cartCntx.addItem(item);
 
     const data = {
@@ -74,7 +74,7 @@ const Mainbar = (props) => {
     };
     axios
       .post(
-        `https://crudcrud.com/api/09a67abe70f54fd3848b18a9e9480844/` +
+        `https://crudcrud.com/api/134952ec7831463fad76bebdb21f9ec8/` +
           data.email.replace("@", "").replace(".", ""),
         item
       )

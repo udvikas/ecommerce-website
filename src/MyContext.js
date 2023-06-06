@@ -18,8 +18,8 @@ export const ContextProvider = (props) => {
   const initialToken = localStorage.getItem("tokenID");
   const [token, setToken] = useState(initialToken);
 
-  const userIsLoggedIn = !!token;
-
+  const userIsLoggedIn = !!token; //true
+ 
   const loginHandler = (token) => {
     setToken(token);
     localStorage.setItem("tokenID", token);
@@ -50,9 +50,9 @@ export const ContextProvider = (props) => {
   const setITEMS = (data) => {
     setCartItems(data)
   }
+
   const removeFromCart = (item) => {
     let findCartItem = cartItems.findIndex((el) => el.id === item.id);
-    console.log(findCartItem);
     cartItems[findCartItem].quantity = 0;
     let itemCopy = [...cartItems];
 

@@ -10,6 +10,7 @@ const AuthForm = () => {
   const navigate = useNavigate();
   const emailInputRef = useRef(); 
   const passwordInputRef = useRef();
+
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
   };
@@ -17,9 +18,7 @@ const AuthForm = () => {
   const submitHandler = (event) => {
     event.preventDefault();
     const enteredEmail = emailInputRef.current.value; 
-    console.log(enteredEmail);
     const enteredPassword = passwordInputRef.current.value; 
-    console.log(enteredPassword);
     // optional: Add Validation
     setIsLoading(true);
     let url;
@@ -47,7 +46,7 @@ const AuthForm = () => {
       if (res.ok) {
         return res.json();
       } else {
-        return res.json().then((data) => {
+        return res.json().then(() => {
           // //show error modal
 
           let errorMessage = "Authentication failed";
@@ -57,7 +56,7 @@ const AuthForm = () => {
     }).then((data) =>{
       authCtx.Login(data.idToken);
       localStorage.setItem("email", enteredEmail);
-      navigate('/store', { state: { email:enteredEmail, password:enteredPassword } });
+      navigate('/store', { state: { email:enteredEmail} });
 
       console.log('successfully logged in!')
     }).catch((err) => {
