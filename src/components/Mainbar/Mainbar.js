@@ -42,19 +42,19 @@ const productsArr = [
 
 const Mainbar = (props) => {
   const cartCntx = useContext(CartContext);
-  
-  const email = localStorage.getItem('email')  
-  const replacedEmail = email.replace("@", "").replace(".", "")
-  console.log('cart items',cartCntx.items);
+
+  const email = localStorage.getItem("email");
+  const replacedEmail = email ? email.replace("@", "").replace(".", "") : "";
+
 
   useEffect(() => {
-    console.log('email', email)
     axios
       .get(
-        `https://crudcrud.com/api/134952ec7831463fad76bebdb21f9ec8/${replacedEmail}`)
+        `https://crudcrud.com/api/23436563753545b4ad1702629e79475b/${replacedEmail}`
+      )
       .then((response) => {
         // Handle successful response
-        console.log('cart response',response.data);
+        console.log(response.data);
         cartCntx.setITEM(response.data);
       })
       .catch((error) => {
@@ -62,11 +62,8 @@ const Mainbar = (props) => {
         console.error(error);
       });
   }, [props.email]);
-  
-
 
   const addToCartHandler = (item) => {
-    console.log("item", item); 
     cartCntx.addItem(item);
 
     const data = {
@@ -74,13 +71,13 @@ const Mainbar = (props) => {
     };
     axios
       .post(
-        `https://crudcrud.com/api/134952ec7831463fad76bebdb21f9ec8/` +
+        `https://crudcrud.com/api/23436563753545b4ad1702629e79475b/` +
           data.email.replace("@", "").replace(".", ""),
         item
       )
       .then((response) => {
         // Handle successful response
-        console.log("data in post", response.data); // data is coming
+        console.log(response.data); // data is coming
       })
       .catch((error) => {
         // Handle error
@@ -88,7 +85,6 @@ const Mainbar = (props) => {
       });
   };
 
- 
   return (
     <>
       <div className="productCard">
